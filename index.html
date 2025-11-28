@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShowUI-&pi;: Flow-based Generative Models as GUI Dexterous Hands</title>
+  <meta name="description" content="ShowUI-&pi; is a 450M flow-based vision-language-action model for unified drag and click control with the ScreenDrag benchmark.">
+  <link rel="stylesheet" href="index.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header-group">
+      <h1 class="main-title">ShowUI-&pi;: Flow-based Generative Models as GUI Dexterous Hands</h1>
+      <p class="subtitle1">Unified discrete-continuous actions for drag-heavy computer use</p>
+      <p class="subtitle2">Siyuan Hu<sup>1</sup>, Kevin Qinghong Lin<sup>2</sup>, Mike Zheng Shou<sup>1*</sup></p>
+      <p class="subtitle2"><span class="affil">1 Show Lab, National University of Singapore</span><br><span class="affil">2 University of Oxford</span><br><span class="affil">* Corresponding author</span></p>
+      <div class="button-group">
+        <a class="btn" href="#abstract">Abstract</a>
+        <a class="btn" href="#screendrag">ScreenDrag</a>
+        <a class="btn" href="#results">Results</a>
+        <a class="btn" href="#visualization">Visualization</a>
+        <a class="btn" href="#bibtex">BibTeX</a>
+      </div>
+    </div>
+
+    <div class="figure">
+      <picture>
+        <source srcset="figures/showui_teaser.svg" type="image/svg+xml">
+        <img src="figures/showui_teaser_hd.png" alt="ShowUI-pi teaser">
+      </picture>
+    </div>
+
+    <p class="body-text-highlight">
+      ShowUI-&pi; is a 450M flow-based vision-language-action model that treats GUI actions as continuous trajectories,
+      generating smooth clicks and drags directly from screen observations. It unifies discrete and continuous actions,
+      enabling precise drawing, rotation, sorting, and captcha solving without tokenized coordinates.
+    </p>
+
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number">26.98%</div>
+        <div class="stat-label">Online success on ScreenDrag</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">20K</div>
+        <div class="stat-label">Recorded drag trajectories</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">505</div>
+        <div class="stat-label">Tasks across five domains</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0.45B</div>
+        <div class="stat-label">Parameters in ShowUI-&pi;</div>
+      </div>
+    </div>
+
+    <div class="content-group" id="abstract">
+      <h2 class="content-title">Abstract</h2>
+      <p class="body-text">
+        Existing GUI agents predict discrete click coordinates, limiting them to short drags and preventing closed-loop,
+        fine-grained control. ShowUI-&pi; is a flow-based generative model that unifies clicks and continuous drags as
+        sequences of cursor waypoints with mouse states. A lightweight action expert trained with flow matching outputs
+        incremental cursor deltas conditioned on streaming visual observations, yielding stable trajectories for tasks such
+        as drawing, rotation, and captcha solving. We also introduce ScreenDrag: 505 real drag tasks across PowerPoint,
+        OS/file manager, Premiere Pro, captchas, and handwriting, plus 20K manually collected and synthesized trajectories
+        with dense coordinates for training and evaluation. ShowUI-&pi; achieves 26.98% online success and the lowest
+        trajectory error with only 450M parameters.
+      </p>
+    </div>
+
+    <div class="figure">
+      <picture>
+        <source srcset="figures/showui_overview.svg" type="image/svg+xml">
+        <img src="figures/showui_overview_hd.png" alt="ShowUI-pi architecture overview">
+      </picture>
+    </div>
+
+    <div class="content-group" id="screendrag">
+      <h2 class="content-title">ScreenDrag Benchmark</h2>
+      <p class="body-text">
+        ScreenDrag targets continuous GUI manipulation with offline and online protocols. It covers 505 tasks (101 per
+        domain) across PowerPoint, OS/file manager, Adobe Premiere Pro, captcha rotation, and handwriting. Training data
+        mixes 20K human and synthetic trajectories with dense cursor coordinates, enabling models to learn long-horizon,
+        smooth motion.
+      </p>
+      <div class="figure">
+        <picture>
+          <source srcset="figures/showui_data.svg" type="image/svg+xml">
+          <img src="figures/showui_data_hd.png" alt="ScreenDrag data pipeline">
+        </picture>
+      </div>
+      <div class="figure">
+        <picture>
+          <source srcset="figures/showui_data_distribution.svg" type="image/svg+xml">
+          <img src="figures/showui_data_distribution_hd.png" alt="ScreenDrag distribution">
+        </picture>
+      </div>
+    </div>
+
+    <div class="content-group" id="results">
+      <h2 class="content-title">Results</h2>
+      <p class="body-text">
+        ShowUI-&pi; surpasses proprietary Gemini-2.5-CUA and open-source OpenCUA-7B on ScreenDrag online success while using
+        far fewer parameters, and leads on captcha and handwriting tasks that need continuous feedback. Offline, it reaches
+        78.55% endpoint accuracy with the lowest trajectory error, showing stable drag generation.
+      </p>
+      <div class="table-wrap">
+        <table class="metrics-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Params</th>
+              <th>OS</th>
+              <th>PPT</th>
+              <th>Premiere</th>
+              <th>Captcha</th>
+              <th>Handwriting</th>
+              <th>Overall</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Operator</td><td>Proprietary</td><td>53.47</td><td>9.90</td><td>2.97</td><td>0.00</td><td>0.00</td><td>13.27</td></tr>
+            <tr><td>UI-TARS-1.5-7B</td><td>7B</td><td>73.27</td><td>1.98</td><td>1.98</td><td>7.92</td><td>0.00</td><td>17.03</td></tr>
+            <tr><td>Seed-1.6-Vision</td><td>Proprietary</td><td>77.23</td><td>3.96</td><td>1.98</td><td>8.91</td><td>2.97</td><td>19.01</td></tr>
+            <tr><td>Gemini-2.5-CUA</td><td>Proprietary</td><td>86.14</td><td>20.79</td><td>0.00</td><td>3.96</td><td>0.00</td><td>22.18</td></tr>
+            <tr><td>OpenCUA-32B</td><td>32B</td><td>97.03</td><td>6.93</td><td>0.00</td><td>0.00</td><td>0.00</td><td>20.79</td></tr>
+            <tr><td>OpenCUA-7B</td><td>7B</td><td>99.01</td><td>4.95</td><td>0.00</td><td>5.94</td><td>0.00</td><td>21.98</td></tr>
+            <tr><td>Qwen3-VL-32B</td><td>32B</td><td>83.17</td><td>4.95</td><td>3.96</td><td>2.97</td><td>0.00</td><td>19.01</td></tr>
+            <tr><td>Qwen3-VL-8B</td><td>8B</td><td>24.75</td><td>5.94</td><td>6.93</td><td>0.00</td><td>0.00</td><td>7.52</td></tr>
+            <tr><td>Qwen3-VL-2B</td><td>2B</td><td>13.86</td><td>6.93</td><td>2.97</td><td>0.00</td><td>0.00</td><td>4.75</td></tr>
+            <tr class="highlight-row"><td>ShowUI-&pi;-450M</td><td>0.45B</td><td>13.11</td><td>22.93</td><td>8.64</td><td>55.91</td><td>34.32</td><td>26.98</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="figure chart-figure">
+        <div class="chart-toggle" id="online-chart-toggle">
+          <button data-domain="overall" class="is-active">Overall</button>
+          <button data-domain="os">OS</button>
+          <button data-domain="ppt">PPT</button>
+          <button data-domain="premiere">Premiere</button>
+          <button data-domain="captcha">Captcha</button>
+          <button data-domain="handwriting">Handwriting</button>
+        </div>
+        <div id="online-success-chart" class="online-success-chart"></div>
+        <p class="chart-note">Online success (%) for ScreenDrag; ShowUI-&pi; is highlighted.</p>
+      </div>
+    </div>
+
+    <div class="content-group" id="visualization">
+      <h2 class="content-title">Visualization</h2>
+      <p class="body-text">
+        Real ShowUI-&pi; trajectories from the paper show continuous control across domains: rotation, captcha dialing,
+        handwriting strokes, and video-editing drag-and-drop.
+      </p>
+      <div class="visual-grid">
+        <div class="visual-item">
+          <img src="figures/showui_powerpoint_traj.png" alt="PowerPoint trajectory">
+          <div class="visual-caption">PowerPoint rotation (long circular drag).</div>
+        </div>
+        <div class="visual-item">
+          <img src="figures/showui_captcha_traj.png" alt="Captcha trajectory">
+          <div class="visual-caption">Captcha dial rotation with stable arcs.</div>
+        </div>
+        <div class="visual-item">
+          <img src="figures/showui_handwriting_traj.png" alt="Handwriting trajectory">
+          <div class="visual-caption">Handwriting strokes with minimal wobble.</div>
+        </div>
+        <div class="visual-item">
+          <img src="figures/showui_premiere_traj.png" alt="Premiere trajectory">
+          <div class="visual-caption">Premiere Pro drag-and-drop into effect stack.</div>
+        </div>
+      </div>
+      <div class="figure">
+        <picture>
+          <source srcset="figures/showui_results.svg" type="image/svg+xml">
+          <img src="figures/showui_results_hd.png" alt="Offline and online results visualization">
+        </picture>
+      </div>
+    </div>
+
+    <div class="content-group" id="bibtex">
+      <h2 class="content-title">BibTeX</h2>
+      <div class="code-block">
+        <code>@misc{hu2025showuipi,
+  title={ShowUI-$\pi$: Flow-based Generative Models as GUI Dexterous Hands},
+  author={Siyuan Hu and Kevin Qinghong Lin and Mike Zheng Shou},
+  year={2025},
+  note={arXiv preprint},
+}</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-group">
+    <div class="footer-content">
+      <p class="footer-text">(c) 2025 Show Lab. Inspired by X-Humanoid. Template adapted from X-Humanoid and Nerfies.</p>
+      <p class="footer-text">Licensed under CC BY-SA 4.0. If reusing this template, please keep attribution.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      if (typeof echarts === "undefined") return;
+      var chartEl = document.getElementById("online-success-chart");
+      if (!chartEl) return;
+
+      var runs = [
+        { name: "Operator", params: "Proprietary", os: 53.47, ppt: 9.90, premiere: 2.97, captcha: 0.00, handwriting: 0.00, overall: 13.27 },
+        { name: "UI-TARS-1.5-7B", params: "7B", os: 73.27, ppt: 1.98, premiere: 1.98, captcha: 7.92, handwriting: 0.00, overall: 17.03 },
+        { name: "Seed-1.6-Vision", params: "Proprietary", os: 77.23, ppt: 3.96, premiere: 1.98, captcha: 8.91, handwriting: 2.97, overall: 19.01 },
+        { name: "Gemini-2.5-CUA", params: "Proprietary", os: 86.14, ppt: 20.79, premiere: 0.00, captcha: 3.96, handwriting: 0.00, overall: 22.18 },
+        { name: "OpenCUA-32B", params: "32B", os: 97.03, ppt: 6.93, premiere: 0.00, captcha: 0.00, handwriting: 0.00, overall: 20.79 },
+        { name: "OpenCUA-7B", params: "7B", os: 99.01, ppt: 4.95, premiere: 0.00, captcha: 5.94, handwriting: 0.00, overall: 21.98 },
+        { name: "Qwen3-VL-32B", params: "32B", os: 83.17, ppt: 4.95, premiere: 3.96, captcha: 2.97, handwriting: 0.00, overall: 19.01 },
+        { name: "Qwen3-VL-8B", params: "8B", os: 24.75, ppt: 5.94, premiere: 6.93, captcha: 0.00, handwriting: 0.00, overall: 7.52 },
+        { name: "Qwen3-VL-2B", params: "2B", os: 13.86, ppt: 6.93, premiere: 2.97, captcha: 0.00, handwriting: 0.00, overall: 4.75 },
+        { name: "ShowUI-pi-450M", params: "0.45B", os: 13.11, ppt: 22.93, premiere: 8.64, captcha: 55.91, handwriting: 34.32, overall: 26.98, ours: true },
+      ];
+
+      var palette = { baseline: "#d9d9d9", ours: "#111827", text: "#262626", grid: "#e6e6e6" };
+      var activeDomain = "overall";
+
+      function labelFor(domain) {
+        switch (domain) {
+          case "os": return "OS";
+          case "ppt": return "PPT";
+          case "premiere": return "Premiere";
+          case "captcha": return "Captcha";
+          case "handwriting": return "Handwriting";
+          default: return "Overall";
+        }
+      }
+
+      function render(domain) {
+        activeDomain = domain || "overall";
+        var key = activeDomain;
+        var sorted = runs.slice().sort(function (a, b) { return (b[key] || 0) - (a[key] || 0); });
+        var maxVal = sorted.reduce(function (m, r) {
+          var v = r[key] || 0;
+          return v > m ? v : m;
+        }, 0);
+        var axisMax = Math.ceil(maxVal / 10) * 10 + 10;
+
+        chart.setOption({
+          backgroundColor: "#ffffff",
+          tooltip: {
+            trigger: "item",
+            backgroundColor: "#ffffff",
+            borderColor: "#cccccc",
+            borderWidth: 1,
+            textStyle: { color: palette.text },
+            formatter: function (p) {
+              var row = sorted[p.dataIndex];
+              return "<b>" + row.name + "</b><br/>" + labelFor(key) + ": " + (row[key] || 0).toFixed(2) + "%";
+            }
+          },
+          grid: { left: 120, right: 20, bottom: 40, top: 10 },
+          xAxis: {
+            type: "value",
+            max: axisMax,
+            splitLine: { lineStyle: { color: palette.grid, type: "dashed" } },
+            axisLabel: { color: palette.text, fontSize: 11, formatter: "{value}%" }
+          },
+          yAxis: {
+            type: "category",
+            data: sorted.map(function (r) { return r.name; }),
+            axisLabel: { color: palette.text, fontSize: 11 },
+            axisLine: { lineStyle: { color: palette.text } },
+          },
+          series: [{
+            type: "bar",
+            data: sorted.map(function (r) {
+              return { value: r[key] || 0, itemStyle: { color: r.ours ? palette.ours : palette.baseline } };
+            }),
+            barWidth: "50%",
+            label: {
+              show: true,
+              position: "right",
+              color: palette.text,
+              fontSize: 11,
+              formatter: function (p) { return p.value.toFixed(2) + "%"; }
+            }
+          }]
+        });
+      }
+
+      var chart = echarts.init(chartEl);
+      var toggle = document.getElementById("online-chart-toggle");
+      if (toggle) {
+        toggle.addEventListener("click", function (ev) {
+          var btn = ev.target.closest("button[data-domain]");
+          if (!btn) return;
+          toggle.querySelectorAll("button").forEach(function (b) { b.classList.toggle("is-active", b === btn); });
+          render(btn.getAttribute("data-domain"));
+        });
+      }
+      render(activeDomain);
+      window.addEventListener("resize", function () { chart.resize(); });
+    })();
+  </script>
+</body>
+</html>
