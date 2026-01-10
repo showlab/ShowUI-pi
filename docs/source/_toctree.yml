@@ -1,0 +1,75 @@
+- sections:
+  - local: index
+    title: LeRobot
+  - local: installation
+    title: Installation
+  title: Get started
+- sections:
+  - local: il_robots
+    title: Imitation Learning for Robots
+  - local: il_sim
+    title: Imitation Learning in Sim
+  - local: cameras
+    title: Cameras
+  - local: integrate_hardware
+    title: Bring Your Own Hardware
+  - local: hilserl
+    title: Train a Robot with RL
+  - local: hilserl_sim
+    title: Train RL in Simulation
+  - local: async
+    title: Use Async Inference
+  title: "Tutorials"
+- sections:
+  - local: lerobot-dataset-v3
+    title: Using LeRobotDataset
+  - local: porting_datasets_v3
+    title: Porting Large Datasets
+  title: "Datasets"
+- sections:
+  - local: smolvla
+    title: Finetune SmolVLA
+  - local: libero
+    title: Using Libero
+  title: "Policies"
+
+- sections:
+  - local: introduction_processors
+    title: Introduction to Robot Processors
+  - local: debug_processor_pipeline
+    title: Debug your processor pipeline
+  - local: implement_your_own_processor
+    title: Implement your own processor
+  - local: processors_robots_teleop
+    title: Processors for Robots and Teleoperators
+  title: "Robot Processors"
+- sections:
+  - local: so101
+    title: SO-101
+  - local: so100
+    title: SO-100
+  - local: koch
+    title: Koch v1.1
+  - local: lekiwi
+    title: LeKiwi
+  - local: hope_jr
+    title: Hope Jr
+  - local: reachy2
+    title: Reachy 2
+  title: "Robots"
+- sections:
+  - local: phone_teleop
+    title: Phone
+  title: "Teleoperators"
+- sections:
+  - local: notebooks
+    title: Notebooks
+  - local: feetech
+    title: Updating Feetech Firmware
+  title: "Resources"
+- sections:
+  - local: contributing
+    title: Contribute to LeRobot
+  - local: backwardcomp
+    title: Backward compatibility
+  title: "About"
