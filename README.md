@@ -1,11 +1,12 @@
-# ShowUI-π: Flow-based Generative Models as GUI Dexterous Hands
-
-Unified discrete-continuous actions for free-form drag computer use.
+<h1 align="center">ShowUI-π: Flow-based Generative Models as GUI Dexterous Hands</h1>
 
 <p align="center">
-  📑 <a href="https://arxiv.org/abs/2512.24965">Paper</a>
-  &nbsp;|&nbsp;
-  🌐 <a href="https://showlab.github.io/showui-pi/">Project Page</a>
+  <i align="center">Unified discrete-continuous actions for free-form drag computer use.</i>
+</p>
+
+<p align="center">
+        &nbsp&nbsp 📑 <a href="https://arxiv.org/abs/2512.24965">Paper</a> &nbsp&nbsp
+        | &nbsp&nbsp 🌐 <a href="https://showlab.github.io/showui-pi/">Project Page</a> &nbsp&nbsp
 </p>
 
 ## Demo
