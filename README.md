@@ -10,13 +10,9 @@ Unified discrete-continuous actions for free-form drag computer use.
 
 ## Demo
 
-[https://raw.githubusercontent.com/showlab/showui-pi/page/assets/showui-pi-demo.mp4]
 
-<p align="center">
-  <a href="https://raw.githubusercontent.com/showlab/showui-pi/page/assets/showui-pi-demo.mp4">
-    <img src="https://raw.githubusercontent.com/showlab/showui-pi/page/assets/teaser_static.png" alt="ShowUI-π demo" width="720">
-  </a>
-</p>
+https://github.com/user-attachments/assets/d033cbf3-e577-4f47-9605-9974a7cefcd7
+
 
 ## Overview
 
