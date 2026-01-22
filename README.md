@@ -8,6 +8,7 @@
         &nbsp&nbsp 📑 <a href="https://arxiv.org/abs/2512.24965">Paper</a> &nbsp&nbsp
         | &nbsp&nbsp 🌐 <a href="https://showlab.github.io/showui-pi/">Project Page</a> &nbsp&nbsp
   | &nbsp&nbsp💬 <a href="https://x.com/HuggingPapers/status/2012559851235197024">X (Twitter)</a>&nbsp&nbsp
+        | &nbsp&nbsp 📦 <a href="https://huggingface.co/datasets/h-siyuan/ScreenDrag">Dataset</a> &nbsp&nbsp
 </p>
 
 > [**ShowUI-π: Flow-based Generative Models as GUI Dexterous Hands**](https://arxiv.org/abs/2512.24965)<br>
