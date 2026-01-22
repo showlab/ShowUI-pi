@@ -17,7 +17,7 @@
 > † Equal contribution &nbsp; * Corresponding author<br>
 
 ## 🔥 Update
-- [x] [2026.1.10] We release the [ScreenDrag](https://huggingface.co/datasets/h-siyuan/ScreenDrag) dataset.
+- [x] [2026.1.22] We release the [ScreenDrag](https://huggingface.co/datasets/h-siyuan/ScreenDrag) dataset.
 - [x] [2026.1.10] Release code and project page.
 
 ## Demo
